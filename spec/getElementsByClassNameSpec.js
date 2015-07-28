@@ -8,6 +8,8 @@ var htmlStrings = [
   '<p><div class="somediv"><div class="innerdiv"><span class="targetClassName">yay</span></div></div></p>'
 ];
 
+
+
 describe('getElementsByClassName', function(){
 
   it('should match the results of calling the built-in function', function(){
