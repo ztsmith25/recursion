@@ -5,24 +5,39 @@
 
 // But instead we're going to implement it from scratch:
 
-var getElementsByClassName = function(className){
-  var elementList = [];
-  var treeFunction = function(branch) {
-    if (branch.childNodes.length === 0) {
-      if((!(branch.classList === undefined)) && (branch.classList.contains(className))) {
-        elementList.push(branch); //I think this is just pushing element
-      }
-    } else {
-      var nodeArray = branch.childNodes;  //and array of all node objects
-	  if((!(branch.classList === undefined)) && (branch.classList.contains(className))) {
-		elementList.push(branch);  //this needs to just push element
-	  }
-      for(var i = 0; i < nodeArray.length; i++) {
-      	console.log(nodeArray[i]);
-        treeFunction(nodeArray[i]);
-      }
+
+var getElementsByClassName = function(className) {
+  var nodesArray = [];
+  var tree = function(node) {
+    if (node.classList.contains(className)) {
+      nodesArray.push(node);
     }
-  }
-  treeFunction(document.body);
-  return elementList;
+    for (var i = 0; i < node.children.length; i++) {
+      tree(node.children[i]);
+    }
+  };
+  tree(document.body);
+  return nodesArray;
 };
+
+// var getElementsByClassName = function(className){
+//   var elementList = [];
+//   var treeFunction = function(branch) {
+//     if (branch.childNodes.length === 0) {
+//       if((!(branch.classList === undefined)) && (branch.classList.contains(className))) {
+//         elementList.push(branch); //I think this is just pushing element
+//       }
+//     } else {
+//       var nodeArray = branch.childNodes;  //and array of all node objects
+// 	  if((!(branch.classList === undefined)) && (branch.classList.contains(className))) {
+// 		elementList.push(branch);  //this needs to just push element
+// 	  }
+//       for(var i = 0; i < nodeArray.length; i++) {
+//       	console.log(nodeArray[i]);
+//         treeFunction(nodeArray[i]);
+//       }
+//     }
+//   }
+//   treeFunction(document.body);
+//   return elementList;
+// };
